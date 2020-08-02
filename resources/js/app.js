@@ -5,7 +5,11 @@
  */
 
 require('./bootstrap');
-
+window.Vue = require('vue');
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+global.jQuery = $;
 window.Vue = require('vue');
 
 /**
