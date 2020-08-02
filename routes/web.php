@@ -28,5 +28,14 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::post('/store','PermissionController@store')->name('store');
            Route::post('/update','PermissionController@update')->name('update');
        });
+       Route::group(['prefix'=>'roles','as'=>'roles.'],function (){
+           Route::get('/','RoleController@index')->name('index');
+           Route::post('/dtData','RoleController@dtData')->name('dt-data');
+           Route::post('/store','RoleController@store')->name('store');
+           Route::get('/edit/{role}','RoleController@edit')->name('edit');
+       });
     });
+   Route::group(['prefix'=>'select','as'=>'select.'],function (){
+       Route::post('/permissions','AjaxController@permissions')->name('permissions');
+   });
 });

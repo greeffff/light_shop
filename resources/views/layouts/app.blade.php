@@ -20,6 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/body.css') }}" rel="stylesheet">
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     @stack('styles')
 </head>
 <body>
@@ -88,6 +89,13 @@
         </main>
     </div>
 </body>
+<script type="application/javascript">
+    // your code
+</script>
 <script src="{{ asset('js/app.js') }}" ></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+    $('.select2').select2();
+</script>
 @stack('scripts')
 </html>

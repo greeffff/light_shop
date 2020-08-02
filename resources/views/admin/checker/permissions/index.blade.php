@@ -4,7 +4,7 @@
         <h1 class="h2">@lang('admin.checker.permissions.title')</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addModal">Добавить разрешение</button>
+                <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addModal">@lang('admin.checker.permissions.add')</button>
             </div>
         </div>
     </div>
@@ -19,36 +19,6 @@
         </tr>
         </thead>
     </table>
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{route('admin.checker.permissions.store')}}" method="POST" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@lang('admin.checker.permissions.create.add')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <div class="form-group">
-                            <div class="text-center">
-                                @csrf
-                                <label for="name">@lang('admin.checker.permissions.create.name')</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                                <label for="display_name">@lang('admin.checker.permissions.create.display_name')</label>
-                                <input type="text" name="display_name" id="display_name" class="form-control">
-                                <label for="description">@lang('admin.checker.permissions.create.description')</label>
-                                <input type="text" name="description" id="description" class="form-control">
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-secondary">Добавить</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
