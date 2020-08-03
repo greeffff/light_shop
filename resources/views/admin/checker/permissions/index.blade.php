@@ -9,7 +9,7 @@
         </div>
     </div>
     @include('notices.notice')
-    <table class="table table-bordered" id="permission-table" class="display" style="width:100%">
+    <table class="table table-bordered" id="permission-table" style="width:100%">
         <thead>
         <tr>
             <th>@lang('admin.checker.permissions.table.name')</th>
@@ -19,12 +19,42 @@
         </tr>
         </thead>
     </table>
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{route('admin.checker.permissions.store')}}" method="POST" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModal">@lang('admin.checker.permissions.create.add')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="form-group">
+                            <div class="text-center">
+                                @csrf
+                                <label for="name">@lang('admin.checker.permissions.create.name')</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                                <label for="display_name">@lang('admin.checker.permissions.create.display_name')</label>
+                                <input type="text" name="display_name" id="display_name" class="form-control">
+                                <label for="description">@lang('admin.checker.permissions.create.description')</label>
+                                <input type="text" name="description" id="description" class="form-control">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-secondary">Добавить</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="{{route('admin.checker.permissions.update')}}" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@lang('admin.checker.permissions.create.add')</h5>
+                        <h5 class="modal-title" id="editModal">@lang('admin.checker.permissions.create.add')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -85,5 +115,46 @@
          modal.find('#description').val(description)
          modal.find('#id').val(id)
      })
+     $('#permission-table').on('click', '.remote', function() {
+         records_id = $(this).attr('data');
+         $.confirm({
+             title: 'Внимание. Удаление.',
+             content: 'Вы действительно хотите удалить запись?',
+             buttons: {
+                 'Удалить':{
+                     btnClass: 'btn-red',
+                     action: function () {
+                         $.ajax({
+                             url: '{{route('admin.checker.permissions.delete')}}',
+                             method: 'DELETE',
+                             data: {id: records_id},
+                             headers: {
+                                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                             },
+                             success: function (res) {
+                                 if (res.success) {
+                                     $.alert({
+                                         title: "sad",
+                                         content: 'Запись успешно удалена!',
+                                         type: 'dark'
+                                     });
+                                     // $('#permission-table').ajax.reload();
+                                 }
+                             },
+                             error: function () {
+                                 $.alert({
+                                     title: 'Ошибка!',
+                                     content: 'Обратитесь к администратору',
+                                     type: 'red'
+                                 });
+                             }
+                         });
+                     },
+                 },
+                 'Отменить': function () {
+                 },
+             }
+         });
+     });
  </script>
 @endpush

@@ -42,4 +42,7 @@ class RoleController extends Controller
     public function edit(Role $role){
         return view('admin.checker.roles.edit',compact('role'));
     }
+    public function update(Role $role,Request $request){
+        return redirect()->route('admin.checker.roles.index')->with(['success'=>$this->role->update($role,$request)]);
+    }
 }

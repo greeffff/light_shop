@@ -11,4 +11,5 @@ interface PermissionInterface
     public function all();
     public function store($request);
     public function update($request);
+    public function delete(Permission $perm);
 }

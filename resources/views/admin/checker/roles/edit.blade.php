@@ -3,7 +3,9 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">@lang('admin.checker.roles.edit.title')</h1>
     </div>
-    <form>
+    <form action="{{route('admin.checker.roles.update',['role'=>$role->id])}}" method="POST" enctype="multipart/form-data">
+    @method('PUT')
+        @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">@lang('admin.checker.roles.edit.name')</label>
@@ -22,7 +24,7 @@
             <label for="inputAddress2">@lang('admin.checker.roles.edit.permissions')</label>
             <select class="form-control select2" id="permissions" name="permissions[]" multiple>
                 @foreach($role->perm_roles as $perm)
-                    <option value="{{$perm->permission_id}}" selected>{{$perm->permission->name}}</option>
+                    <option value="{{$perm->permission_id}}" selected>{{$perm->permission->display_name}}</option>
                 @endforeach
             </select>
         </div>

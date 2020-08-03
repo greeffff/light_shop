@@ -27,15 +27,26 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::post('/dtData','PermissionController@dtData')->name('dt-data');
            Route::post('/store','PermissionController@store')->name('store');
            Route::post('/update','PermissionController@update')->name('update');
+           Route::delete('/delete','PermissionController@delete')->name('delete');
        });
        Route::group(['prefix'=>'roles','as'=>'roles.'],function (){
            Route::get('/','RoleController@index')->name('index');
            Route::post('/dtData','RoleController@dtData')->name('dt-data');
            Route::post('/store','RoleController@store')->name('store');
            Route::get('/edit/{role}','RoleController@edit')->name('edit');
+           Route::put('/update/{role}','RoleController@update')->name('update');
+       });
+       Route::group(['prefix'=>'users','as'=>'users.'],function (){
+           Route::get('/','UserController@index')->name('index');
+           Route::post('/dtData','UserController@dtData')->name('dt-data');
+           Route::post('/store','UserController@store')->name('store');
+           Route::get('/edit/{user}','UserController@edit')->name('edit');
+           Route::put('/update/{user}','UserController@update')->name('update');
+           Route::get('/create','UserController@create')->name('create');
        });
     });
    Route::group(['prefix'=>'select','as'=>'select.'],function (){
        Route::post('/permissions','AjaxController@permissions')->name('permissions');
+       Route::post('/roles','AjaxController@roles')->name('roles');
    });
 });

@@ -17,7 +17,7 @@ class AjaxController extends Controller
                     DB::raw("CONCAT(display_name) AS text")
                 ]);
         if (isset($request->term)) {
-            $data = $data->where('name', 'ILIKE', '%' . $request->term . '%');
+            $data = $data->where('display_name', 'ILIKE', '%' . $request->term . '%');
         }
         $data = $data->get();
         return response()->json($data);
@@ -25,5 +25,9 @@ class AjaxController extends Controller
     public function permissions(Request $request)
     {
         return self::select($request,'permissions');
+    }
+    public function roles(Request $request)
+    {
+        return self::select($request,'roles');
     }
 }

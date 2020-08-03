@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Checker;
 
 use App\Http\Controllers\Controller;
+use App\Models\Checker\Permission;
 use App\Repositories\Interfaces\Checker\PermissionInterface;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Contracts\DataTable;
@@ -30,5 +31,9 @@ class PermissionController extends Controller
     }
     public function update(Request $request){
         return redirect()->back()->with(['success'=> $this->permission->update($request)]);
+    }
+    public function delete(Request $request){
+        dd($request);
+        return redirect()->back()->with(['success'=> $this->permission->update($perm)]);
     }
 }

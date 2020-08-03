@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\Checker\PermissionServiceProvider::class,
         App\Providers\Checker\RoleServiceProvider::class,
+        App\Providers\Checker\UserServiceProvider::class,
 
     ],
 

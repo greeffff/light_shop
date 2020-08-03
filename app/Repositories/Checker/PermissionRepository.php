@@ -28,4 +28,10 @@ class PermissionRepository implements PermissionInterface
         return 'Разрешение изменено';
         // TODO: Implement update() method.
     }
+    public function delete(Permission $perm)
+    {
+        $perm->delete();
+        return 'Разрешение удалено';
+        // TODO: Implement delete() method.
+    }
 }
