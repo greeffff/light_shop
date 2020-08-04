@@ -16,7 +16,8 @@ module.exports = {
             test: require.resolve('jquery'),
             use: [{
                 loader: 'expose-loader',
-                options: 'jQuery'
+                options: 'jQuery',
+                confirm:'jquery-confirm',
             },{
                 loader: 'expose-loader',
                 options: '$'

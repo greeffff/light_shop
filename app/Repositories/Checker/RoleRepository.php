@@ -39,8 +39,10 @@ class RoleRepository implements RoleInterface
         return 'Роль изменена';
         // TODO: Implement update() method.
     }
-    public function delete(Role $role)
+    public function delete($id)
     {
+        Role::destroy($id);
+        return 'Роль удалено';
         // TODO: Implement delete() method.
     }
 }

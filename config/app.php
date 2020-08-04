@@ -177,7 +177,7 @@ return [
         App\Providers\Checker\PermissionServiceProvider::class,
         App\Providers\Checker\RoleServiceProvider::class,
         App\Providers\Checker\UserServiceProvider::class,
-
+        App\Checker\CheckerServiceProvider::class,
     ],
 
     /*
@@ -230,7 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        'Entrust'   => App\Checker\CheckerFacade::class,
     ],
 
 ];

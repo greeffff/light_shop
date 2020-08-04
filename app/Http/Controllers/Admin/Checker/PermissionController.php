@@ -33,7 +33,6 @@ class PermissionController extends Controller
         return redirect()->back()->with(['success'=> $this->permission->update($request)]);
     }
     public function delete(Request $request){
-        dd($request);
-        return redirect()->back()->with(['success'=> $this->permission->update($perm)]);
+        return response()->json(['success'=> $this->permission->delete($request->id)]);
     }
 }

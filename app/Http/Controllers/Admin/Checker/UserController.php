@@ -38,6 +38,10 @@ class UserController extends Controller
             ->with(['success'=>$this->user->update($user,$request)]);
     }
 
+    public function delete(Request $request){
+        return response()->json(['success'=> $this->user->delete($request->id)]);
+    }
+
     public function dtData(){
         return datatables()->of($this->user->all())
             ->addColumn('roles',function ($model){

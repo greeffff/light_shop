@@ -24,7 +24,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#users-table').DataTable( {
+           let table =  $('#users-table').DataTable( {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
@@ -43,5 +43,46 @@
                 ]
             } );
         } );
+        $('#users-table').on('click', '.remote', function() {
+            records_id = $(this).attr('data-content');
+            $.confirm({
+                title: 'Внимание. Удаление.',
+                content: 'Вы действительно хотите удалить запись?',
+                buttons: {
+                    'Удалить':{
+                        btnClass: 'btn-red',
+                        action: function () {
+                            $.ajax({
+                                url: '{{route('admin.checker.users.delete')}}',
+                                method: 'POST',
+                                data: {id: records_id},
+                                headers: {
+                                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function (res) {
+                                    if (res.success) {
+                                        $.alert({
+                                            title: "Удаление",
+                                            content: 'Запись успешно удалена!',
+                                            type: 'dark'
+                                        });
+                                        table.ajax.reload();
+                                    }
+                                },
+                                error: function () {
+                                    $.alert({
+                                        title: 'Ошибка!',
+                                        content: 'Обратитесь к администратору',
+                                        type: 'red'
+                                    });
+                                }
+                            });
+                        },
+                    },
+                    'Отменить': function () {
+                    },
+                }
+            });
+        });
     </script>
 @endpush

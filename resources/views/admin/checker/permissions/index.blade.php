@@ -84,7 +84,7 @@
 @push('scripts')
  <script>
      $(document).ready(function() {
-         $('#permission-table').DataTable( {
+        let table =  $('#permission-table').DataTable( {
              "processing": true,
              "serverSide": true,
              "ajax": {
@@ -116,7 +116,7 @@
          modal.find('#id').val(id)
      })
      $('#permission-table').on('click', '.remote', function() {
-         records_id = $(this).attr('data');
+         records_id = $(this).attr('data-content');
          $.confirm({
              title: 'Внимание. Удаление.',
              content: 'Вы действительно хотите удалить запись?',
@@ -126,7 +126,7 @@
                      action: function () {
                          $.ajax({
                              url: '{{route('admin.checker.permissions.delete')}}',
-                             method: 'DELETE',
+                             method: 'POST',
                              data: {id: records_id},
                              headers: {
                                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -134,11 +134,11 @@
                              success: function (res) {
                                  if (res.success) {
                                      $.alert({
-                                         title: "sad",
+                                         title: "Удаление",
                                          content: 'Запись успешно удалена!',
                                          type: 'dark'
                                      });
-                                     // $('#permission-table').ajax.reload();
+                                     table.ajax.reload();
                                  }
                              },
                              error: function () {

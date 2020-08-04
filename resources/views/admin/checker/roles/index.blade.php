@@ -9,7 +9,7 @@
         </div>
     </div>
     @include('notices.notice')
-    <table class="table table-bordered" id="role-table" class="display" style="width:100%">
+    <table class="table table-bordered" id="role-table" style="width:100%">
         <thead>
         <tr>
             <th>@lang('admin.checker.roles.table.name')</th>
@@ -25,7 +25,7 @@
             <div class="modal-content">
                 <form action="{{route('admin.checker.roles.store')}}" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@lang('admin.checker.roles.create.add')</h5>
+                        <h5 class="modal-title" id="addModal">@lang('admin.checker.roles.create.add')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,7 +60,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#role-table').DataTable( {
+           let table = $('#role-table').DataTable( {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
@@ -79,5 +79,46 @@
                 ]
             } );
         } );
+        $('#role-table').on('click', '.remote', function() {
+            records_id = $(this).attr('data-content');
+            $.confirm({
+                title: 'Внимание. Удаление.',
+                content: 'Вы действительно хотите удалить запись?',
+                buttons: {
+                    'Удалить':{
+                        btnClass: 'btn-red',
+                        action: function () {
+                            $.ajax({
+                                url: '{{route('admin.checker.roles.delete')}}',
+                                method: 'POST',
+                                data: {id: records_id},
+                                headers: {
+                                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function (res) {
+                                    if (res.success) {
+                                        $.alert({
+                                            title: "Удаление",
+                                            content: 'Запись успешно удалена!',
+                                            type: 'dark'
+                                        });
+                                        table.ajax.reload();
+                                    }
+                                },
+                                error: function () {
+                                    $.alert({
+                                        title: 'Ошибка!',
+                                        content: 'Обратитесь к администратору',
+                                        type: 'red'
+                                    });
+                                }
+                            });
+                        },
+                    },
+                    'Отменить': function () {
+                    },
+                }
+            });
+        });
     </script>
 @endpush

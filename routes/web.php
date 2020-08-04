@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/','IndexController@index')->name('index');
+Route::get('/','IndexController@index')->name('index')->middleware('permission:user');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>'admin.'],function (){
    Route::get('/','AdminController@index')->name('index');
@@ -27,7 +27,7 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::post('/dtData','PermissionController@dtData')->name('dt-data');
            Route::post('/store','PermissionController@store')->name('store');
            Route::post('/update','PermissionController@update')->name('update');
-           Route::delete('/delete','PermissionController@delete')->name('delete');
+           Route::post('/delete','PermissionController@delete')->name('delete');
        });
        Route::group(['prefix'=>'roles','as'=>'roles.'],function (){
            Route::get('/','RoleController@index')->name('index');
@@ -35,6 +35,7 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::post('/store','RoleController@store')->name('store');
            Route::get('/edit/{role}','RoleController@edit')->name('edit');
            Route::put('/update/{role}','RoleController@update')->name('update');
+           Route::post('/delete','RoleController@delete')->name('delete');
        });
        Route::group(['prefix'=>'users','as'=>'users.'],function (){
            Route::get('/','UserController@index')->name('index');
@@ -43,6 +44,7 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::get('/edit/{user}','UserController@edit')->name('edit');
            Route::put('/update/{user}','UserController@update')->name('update');
            Route::get('/create','UserController@create')->name('create');
+           Route::post('/delete','UserController@delete')->name('delete');
        });
     });
    Route::group(['prefix'=>'select','as'=>'select.'],function (){

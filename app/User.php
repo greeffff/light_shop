@@ -43,4 +43,5 @@ class User extends Authenticatable
     public function role_list(){
         return $this->hasMany('App\Models\Checker\RoleUser','user_id');
     }
+
 }

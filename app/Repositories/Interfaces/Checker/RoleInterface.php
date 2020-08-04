@@ -11,5 +11,5 @@ interface RoleInterface
     public function all();
     public function store($request);
     public function update(Role $role, $request);
-    public function delete(Role $role);
+    public function delete($id);
 }

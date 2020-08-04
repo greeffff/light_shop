@@ -7,6 +7,7 @@ namespace App\Repositories\Checker;
 use App\Models\Checker\RoleUser;
 use App\Repositories\Interfaces\Checker\UserInterface;
 use App\User;
+use http\Env\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserInterface
@@ -42,8 +43,10 @@ class UserRepository implements UserInterface
         return 'Пользователь изменен';
         // TODO: Implement update() method.
     }
-    public function delete(User $user)
+    public function delete($id)
     {
+        User::destroy($id);
+        return 'Пользователь удален';
         // TODO: Implement delete() method.
     }
 }

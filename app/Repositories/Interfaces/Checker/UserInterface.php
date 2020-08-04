@@ -12,5 +12,5 @@ interface UserInterface
     public function all();
     public function store($request);
     public function update(User $user, $request);
-    public function delete(User $user);
+    public function delete($id);
 }
