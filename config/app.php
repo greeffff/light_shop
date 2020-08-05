@@ -177,6 +177,7 @@ return [
         App\Providers\Checker\PermissionServiceProvider::class,
         App\Providers\Checker\RoleServiceProvider::class,
         App\Providers\Checker\UserServiceProvider::class,
+        App\Providers\CategoryServiceProvider::class,
         App\Checker\CheckerServiceProvider::class,
     ],
 

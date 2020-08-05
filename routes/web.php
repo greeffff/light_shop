@@ -47,8 +47,14 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
            Route::post('/delete','UserController@delete')->name('delete');
        });
     });
+   Route::group(['prefix'=>'categories','as'=>'categories.'],function (){
+      Route::get('/','CategoryController@index')->name('index');
+      Route::post('/dtData','CategoryController@dtData')->name('dt-data');
+       Route::post('/store','CategoryController@store')->name('store');
+   });
    Route::group(['prefix'=>'select','as'=>'select.'],function (){
        Route::post('/permissions','AjaxController@permissions')->name('permissions');
        Route::post('/roles','AjaxController@roles')->name('roles');
+       Route::post('/categories','AjaxController@categories')->name('categories');
    });
 });
