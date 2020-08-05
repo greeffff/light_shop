@@ -6,7 +6,6 @@ namespace App\Checker;
 
 class CheckerRole
 {
-    use EntrustRoleTrait;
 
     /**
      * The database table used by the model.
@@ -23,6 +22,6 @@ class CheckerRole
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = Config::get('entrust.roles_table');
+        $this->table = Config::get('checker.roles_table');
     }
 }

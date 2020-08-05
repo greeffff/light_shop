@@ -230,7 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Entrust'   => App\Checker\CheckerFacade::class,
+        'Checker'   => App\Checker\CheckerFacade::class,
     ],
 
 ];

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/','IndexController@index')->name('index')->middleware('permission:user');
+Route::get('/','IndexController@index')->name('index')->middleware('permission:general_page');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>'admin.'],function (){
    Route::get('/','AdminController@index')->name('index');

@@ -34,7 +34,6 @@ class Role
         if (!is_array($roles)) {
             $roles = explode(self::DELIMITER, $roles);
         }
-        dd($this);
         if ($this->auth->guest() || !$request->user()->hasRole($roles)) {
             abort(403);
         }

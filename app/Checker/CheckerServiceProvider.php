@@ -42,7 +42,6 @@ class CheckerServiceProvider extends ServiceProvider
     {
         if (!class_exists('\Blade')) return;
 
-        // Call to Entrust::hasRole
         \Blade::directive('role', function($expression) {
             return "<?php if (\\Checker::hasRole({$expression})) : ?>";
         });
@@ -51,16 +50,14 @@ class CheckerServiceProvider extends ServiceProvider
             return "<?php endif; // Checker::hasRole ?>";
         });
 
-        // Call to Entrust::can
         \Blade::directive('permission', function($expression) {
             return "<?php if (\\Checker::can({$expression})) : ?>";
         });
 
         \Blade::directive('endpermission', function($expression) {
-            return "<?php endif; // Entrust::can ?>";
+            return "<?php endif; // Checker::can ?>";
         });
 
-        // Call to Entrust::ability
         \Blade::directive('ability', function($expression) {
             return "<?php if (\\Checker::ability({$expression})) : ?>";
         });
@@ -75,7 +72,7 @@ class CheckerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerEntrust()
+    private function registerChecker()
     {
         $this->app->bind('checker', function ($app) {
             return new Checker($app);
@@ -97,7 +94,6 @@ class CheckerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Merges user's and entrust's configs.
      *
      * @return void
      */
