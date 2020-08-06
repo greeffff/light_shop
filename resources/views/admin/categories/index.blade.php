@@ -9,7 +9,7 @@
         </div>
     </div>
     @include('notices.notice')
-    <table class="table table-bordered" id="permission-table" style="width:100%">
+    <table class="table table-bordered" id="categories-table" style="width:100%">
         <thead>
         <tr>
             <th>@lang('admin.categories.table.name')</th>
@@ -36,7 +36,7 @@
                                 <label for="name">@lang('admin.categories.create.name')</label>
                                 <input type="text" class="form-control" id="name" name="name" value="">
                                 <label for="email">@lang('admin.categories.create.parent_name')</label>
-                                <select class="form-control select2" id="parent_id" name="parent_id">
+                                <select class="form-control select2" id="parent_id" name="parent_id" style="width: 100%">
                                 </select>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            let table =  $('#permission-table').DataTable( {
+            let table =  $('#categories-table').DataTable( {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
@@ -86,6 +86,47 @@
                     };
                 },
             }
+        });
+        $('#categories-table').on('click', '.remote', function() {
+            records_id = $(this).attr('data-content');
+            $.confirm({
+                title: 'Внимание. Удаление.',
+                content: 'Вы действительно хотите удалить запись?',
+                buttons: {
+                    'Удалить':{
+                        btnClass: 'btn-red',
+                        action: function () {
+                            $.ajax({
+                                url: '{{route('admin.categories.delete')}}',
+                                method: 'POST',
+                                data: {id: records_id},
+                                headers: {
+                                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function (res) {
+                                    if (res.success) {
+                                        $.alert({
+                                            title: "Удаление",
+                                            content: 'Запись успешно удалена!',
+                                            type: 'dark'
+                                        });
+                                        table.ajax.reload();
+                                    }
+                                },
+                                error: function () {
+                                    $.alert({
+                                        title: 'Ошибка!',
+                                        content: 'Обратитесь к администратору',
+                                        type: 'red'
+                                    });
+                                }
+                            });
+                        },
+                    },
+                    'Отменить': function () {
+                    },
+                }
+            });
         });
     </script>
 @endpush

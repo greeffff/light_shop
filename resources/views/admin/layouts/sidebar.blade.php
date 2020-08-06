@@ -14,7 +14,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('admin.products.index')}}">
                     <i class="fas fa-plus"></i>
                     @lang('admin.product.add')
                 </a>

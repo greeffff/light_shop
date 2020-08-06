@@ -24,5 +24,17 @@ class CategoryRepository implements CategoryInterface
 //        dd($request);
         // TODO: Implement store() method.
     }
-
+    public function update(Category $category, $request)
+    {
+        $category->fill($request->all());
+        $category->save();
+        return 'Категория изменена';
+        // TODO: Implement update() method.
+    }
+    public function delete($id)
+    {
+        Category::destroy($id);
+        return 'Категория удалено';
+        // TODO: Implement delete() method.
+    }
 }

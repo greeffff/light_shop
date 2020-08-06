@@ -51,7 +51,13 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
       Route::get('/','CategoryController@index')->name('index');
       Route::post('/dtData','CategoryController@dtData')->name('dt-data');
        Route::post('/store','CategoryController@store')->name('store');
+       Route::get('/edit/{category}','CategoryController@edit')->name('edit');
+       Route::put('/update/{category}','CategoryController@update')->name('update');
+       Route::post('/delete','CategoryController@delete')->name('delete');
    });
+    Route::group(['prefix'=>'products','as'=>'products.'],function (){
+        Route::get('/','ProductController@index')->name('index');
+    });
    Route::group(['prefix'=>'select','as'=>'select.'],function (){
        Route::post('/permissions','AjaxController@permissions')->name('permissions');
        Route::post('/roles','AjaxController@roles')->name('roles');
