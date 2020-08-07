@@ -4,7 +4,7 @@
         <h1 class="h2">@lang('admin.products.title')</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <a href="{{route('admin.checker.users.create')}}" class="btn btn-sm btn-outline-secondary">@lang('admin.products.add')</a>
+                <a href="{{route('admin.products.create')}}" class="btn btn-sm btn-outline-secondary">@lang('admin.products.add')</a>
             </div>
         </div>
     </div>
@@ -24,20 +24,20 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-           let table =  $('#users-table').DataTable( {
+           let table =  $('#products-table').DataTable( {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
                     "headers": {
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     },
-                    "url": "{{route('admin.checker.users.dt-data')}}",
+                    "url": "{{route('admin.products.dt-data')}}",
                     "type": "POST"
                 },
                 "columns": [
                     { "data": "name" },
-                    { "data": "email" },
-                    { "data": "roles" },
+                    { "data": "description" },
+                    { "data": "price" },
                     { "data": "created_at" },
                     { "data": "edit" },
                 ]

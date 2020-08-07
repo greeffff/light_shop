@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -38,5 +39,8 @@ class AjaxController extends Controller
     public function categories(Request $request)
     {
         return self::select($request,'categories');
+    }
+    public function sub_categories(Request $request){
+        return Category::where('parent_id',$request->parent_id)->get(['id as id','name as text','name as name']);
     }
 }

@@ -48,8 +48,8 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
        });
     });
    Route::group(['prefix'=>'categories','as'=>'categories.'],function (){
-      Route::get('/','CategoryController@index')->name('index');
-      Route::post('/dtData','CategoryController@dtData')->name('dt-data');
+       Route::get('/','CategoryController@index')->name('index');
+       Route::post('/dtData','CategoryController@dtData')->name('dt-data');
        Route::post('/store','CategoryController@store')->name('store');
        Route::get('/edit/{category}','CategoryController@edit')->name('edit');
        Route::put('/update/{category}','CategoryController@update')->name('update');
@@ -57,10 +57,14 @@ Route::group(['Middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin','as'=>
    });
     Route::group(['prefix'=>'products','as'=>'products.'],function (){
         Route::get('/','ProductController@index')->name('index');
+        Route::post('/dtData','ProductController@dtData')->name('dt-data');
+        Route::get('/create','ProductController@create')->name('create');
+        Route::post('/create','ProductController@store')->name('store');
     });
    Route::group(['prefix'=>'select','as'=>'select.'],function (){
        Route::post('/permissions','AjaxController@permissions')->name('permissions');
        Route::post('/roles','AjaxController@roles')->name('roles');
        Route::post('/categories','AjaxController@categories')->name('categories');
+       Route::post('/sub_categories','AjaxController@sub_categories')->name('sub_categories');
    });
 });

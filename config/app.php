@@ -178,6 +178,7 @@ return [
         App\Providers\Checker\RoleServiceProvider::class,
         App\Providers\Checker\UserServiceProvider::class,
         App\Providers\CategoryServiceProvider::class,
+        App\Providers\ProductServiceProvider::class,
         App\Checker\CheckerServiceProvider::class,
     ],
 

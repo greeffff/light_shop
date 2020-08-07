@@ -27,7 +27,6 @@ class CategoryController extends Controller
                     return $model->parent->name;
                 }
             })
-//            ->rawColumns(['roles'])
             ->make(true);
     }
     public function store(Request $request){

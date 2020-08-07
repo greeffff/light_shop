@@ -96,6 +96,8 @@
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="{{asset('js/handlebars.min-v4.7.6.js')}}"></script>
+
 <script>
     $('.select2').select2();
 </script>
